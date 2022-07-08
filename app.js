@@ -5,7 +5,7 @@ const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Selectors 
-const wrapper = document.querySelector(".wrapper");
+const secondRow = document.querySelector(".second-row");
 
 
 // Current location coordinates.
@@ -62,7 +62,7 @@ const wrapper = document.querySelector(".wrapper");
 
             const card = document.createElement('div');
             card.classList.add('day');
-            wrapper.appendChild(card);
+            secondRow.appendChild(card);
             
             const titleDay = document.createElement('p');
             const iconImg = document.createElement('img');

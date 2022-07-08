@@ -1,13 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     display: flex;
-    font-weight: 500;
-    font-family: 'Raleway', sans-serif;
     background: #100e1d;
     height: 100vh;
 }
@@ -18,13 +18,52 @@ body {
     background-color: #1e213a;
 }
 
-.wrapper {
+.right-container {
+    width: 70%;
+    height: 100%;
+}
+
+.right-container .first-row {
+    display: flex;
+    padding: 30px;
+    flex-wrap: nowrap;
+    justify-content: right;
+    gap: 10px;
+}
+
+.celcius-btn, .fahrenheit-btn {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: .9rem;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+
+.right-container .second-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
+}
+
+.right-container .third-row {
     width: 70%;
 }
+
+.third-row .hightlights-title {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 70px 0 30px 0;
+    position: relative;
+    left: 14vw;
+    color: #fff;
+    font-weight: bold;
+}
+
 .day {
     background-color: #1e213a;
     text-align: center;
