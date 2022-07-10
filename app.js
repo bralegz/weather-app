@@ -36,7 +36,7 @@ const pressure = document.querySelector(".pressure");
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keyWeather}`)
             .then(res => res.json())
             .then(currentDayResult => {
-                console.log(currentDayResult)
+                // console.log(currentDayResult)
                 //result destructuring
                 const {
                     main: {humidity: currentHumidity, pressure: currentPressure, temp: currentTemp},
@@ -59,9 +59,11 @@ const pressure = document.querySelector(".pressure");
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyWeather}`)
                 .then(res => res.json())
                 .then(result5Days => {
-                    console.log(`${city}, ${country}`)
-                    console.log(result5Days);
-                    renderWeatherInfo(result5Days)
+                    // console.log(`${city}, ${country}`)
+                    // console.log(result5Days);
+                    const {list: dayList} = result5Days;
+
+                    render5DaysInfo(dayList)
                 })
                 .catch(err => {
                     console.log(err);
@@ -103,16 +105,18 @@ const pressure = document.querySelector(".pressure");
 
     // RENDER 5 DAYS INFO
 
-    function renderWeatherInfo(weatherInfo) {
+    function render5DaysInfo(dayList) {
+        
+        const filterDayList  = dayList.filter((element, index) => {
+            return index === 8 || index === 16 || index === 24 || index === 32 || index === 39
+        });
 
-        for (let i = 2; i < 35; i += 8) {
-            // const tempMax = Math.floor(weatherInfo.list[i].main.temp_max - 273.15);
-            // const tempMin = Math.floor(weatherInfo.list[i].main.temp_min - 273.15);
-            // const currentTemp = Math.floor(weatherInfo.list[i].main.temp - 273.15);
-            const icon = weatherInfo.list[i].weather[0].icon; 
-            const imgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
+        console.log(filterDayList)
+
+        for( const {main: {temp_max: tempMax, temp_min: tempMin}, weather: [{icon: iconCode}], dt_txt: dayDate} of filterDayList) {
             
-            const dayDate = weatherInfo.list[i].dt_txt;
+            const imgUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+
             const arrayDayDate = [dayDate.substr(0,4), dayDate.substr(5,2), dayDate.substr(8,2)];
             const formatDayDate = `${arrayDayDate[0]}, ${arrayDayDate[1]}, ${arrayDayDate[2]}`
             const newDate = new Date(formatDayDate);
@@ -121,7 +125,7 @@ const pressure = document.querySelector(".pressure");
             const card = document.createElement('div');
             card.classList.add('day');
             secondRow.appendChild(card);
-            
+
             const titleDay = document.createElement('p');
             const iconImg = document.createElement('img');
             iconImg.src = imgUrl; 
@@ -129,22 +133,8 @@ const pressure = document.querySelector(".pressure");
             card.appendChild(titleDay);
             card.appendChild(iconImg);
 
-            console.log(icon);
 
         }
-
-
-
-        // console.log(`${visibility} miles`);
-        // console.log(`${airPressure} mb`);
-        // console.log(`${tempMax} ºC`);
-        // console.log(`${tempMin} ºC`);
-        // console.log(`${currentTemp} ºC`);
-        // console.log(`${windSpeed} mph`);
-        // console.log(`${humidity} %`);
-        // console.log(imgUrl);
-        // console.log(newDate);
-        // console.log(`${weekDays[newDate.getDay()]}, ${newDate.getDate()} ${months[newDate.getMonth()]}`);
     
     }
 
