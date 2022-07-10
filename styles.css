@@ -63,6 +63,7 @@ body {
     height: 170px;
 }
 
+/* HIGHLIGHTS */
 
 .right-container .third-row {
     display: flex;
@@ -85,8 +86,29 @@ body {
 
 .third-row .hightlights-card {
     background-color: #1e213a;
+    text-align: center;
+    color: #fff;
     width: 35%;
-    height: 160px;
+    height: auto;
+}
+
+.hightlights-card p {
+    padding: 15px 15px 5px;
+}
+
+p.wind-value {
+    margin-block-start: 0;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+}
+
+p span {
+    font-weight: 400;
+    font-size: 2rem;
 }
 
 .fourth-row {

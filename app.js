@@ -6,6 +6,10 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 // Selectors 
 const secondRow = document.querySelector(".second-row");
+const wind = document.querySelector(".wind");
+const humidity = document.querySelector(".humidity");
+const visibility = document.querySelector(".visibility");
+const pressure = document.querySelector(".pressure");
 
 
 // Current location coordinates.
@@ -44,14 +48,14 @@ const secondRow = document.querySelector(".second-row");
 
     function renderWeatherInfo(weatherInfo) {
 
-        for (let i = 0; i < 35; i += 8) {
-            const visibility = (weatherInfo.list[i].visibility / 1609).toFixed(1); //convert meters to miles
-            const windSpeed = Math.floor(weatherInfo.list[i].wind.speed * 2.237);
-            const airPressure = weatherInfo.list[i].main.pressure;
-            const humidity = weatherInfo.list[i].main.humidity
-            const tempMax = Math.floor(weatherInfo.list[i].main.temp_max - 273.15);
-            const tempMin = Math.floor(weatherInfo.list[i].main.temp_min - 273.15);
-            const currentTemp = Math.floor(weatherInfo.list[i].main.temp - 273.15);
+        for (let i = 2; i < 35; i += 8) {
+            // const visibility = (weatherInfo.list[i].visibility / 1609).toFixed(1); //convert meters to miles
+            // const windSpeed = Math.floor(weatherInfo.list[i].wind.speed * 2.237);
+            // const airPressure = weatherInfo.list[i].main.pressure;
+            // const humidity = weatherInfo.list[i].main.humidity
+            // const tempMax = Math.floor(weatherInfo.list[i].main.temp_max - 273.15);
+            // const tempMin = Math.floor(weatherInfo.list[i].main.temp_min - 273.15);
+            // const currentTemp = Math.floor(weatherInfo.list[i].main.temp - 273.15);
             const icon = weatherInfo.list[i].weather[0].icon; 
             const imgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
             
@@ -60,6 +64,7 @@ const secondRow = document.querySelector(".second-row");
             const formatDayDate = `${arrayDayDate[0]}, ${arrayDayDate[1]}, ${arrayDayDate[2]}`
             const newDate = new Date(formatDayDate);
 
+            // Insert elements into the html
             const card = document.createElement('div');
             card.classList.add('day');
             secondRow.appendChild(card);
@@ -70,10 +75,15 @@ const secondRow = document.querySelector(".second-row");
             titleDay.innerHTML = `${weekDays[newDate.getDay()]}, ${newDate.getDate()} ${months[newDate.getMonth()]}`;
             card.appendChild(titleDay);
             card.appendChild(iconImg);
-            
+
             console.log(icon);
 
         }
+
+            const windStatus = document.createElement('p');
+            windStatus.classList.add('wind-value');
+            windStatus.innerHTML = `${Math.floor(weatherInfo.list[2].wind.speed * 2.237)}<span>mph</span>`
+            wind.appendChild(windStatus);
 
 
 
