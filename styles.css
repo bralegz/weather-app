@@ -19,6 +19,82 @@ body {
     background-color: #1e213a;
 }
 
+.search-btn-container {
+    padding: 40px 0 40px 0;
+    gap: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.search-btn {
+    color: #fff;
+    background-color: #6B737B;
+    padding: 10px 17px 10px 17px;
+    text-align: center
+}
+
+
+.crosshair-btn {
+    background-color: #6B737B;
+    color: #fff;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    font-weight: bold;
+    font-size: 35px;
+    padding-bottom: 1px;
+}
+
+.today-iconContainer {
+    text-align: center;
+    padding: 20px;
+}
+
+.today-iconContainer img {
+    width: 200px;
+    height: 200px;
+}
+
+.today-infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p.todayTempValue {
+    color: #fff;
+    font-size: 5rem;
+}
+
+p.todayTempValue span {
+    font-weight: 500;
+    color: #A4A1AE;
+}
+
+p.today-main-weather {
+    color: #A4A1AE;
+    font-size: 2rem;
+    margin: 100px 0 50px 0;
+}
+
+p.today-date {
+    color: #A4A1AE;
+    margin-top: 80px;
+
+}
+
+p.today-city {
+    color: #A4A1AE;
+    padding: 40px;
+}
+
 .right-container {
     display: flex;
     flex-direction: column;
@@ -37,6 +113,8 @@ body {
 }
 
 .celcius-btn, .fahrenheit-btn {
+    background-color: #695E84;
+    color: #fff;
     font-family: 'Raleway', sans-serif;
     font-weight: bold;
     font-size: .9rem;
