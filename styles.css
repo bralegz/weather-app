@@ -47,7 +47,7 @@ body {
     width: 35px;
     border-radius: 100%;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 20px;
     padding-bottom: 1px;
 }
 
@@ -112,7 +112,19 @@ p.today-city {
     gap: 10px;
 }
 
-.celcius-btn, .fahrenheit-btn {
+/* .celcius-btn {
+    background-color: #fff;
+    color: #000;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: .9rem;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+} */
+
+.fahrenheit-btn, .celcius-btn {
     background-color: #695E84;
     color: #fff;
     font-family: 'Raleway', sans-serif;
@@ -122,6 +134,11 @@ p.today-city {
     width: 35px;
     text-align: center;
     border-radius: 50%;
+}
+
+.changeTemp {
+    background-color: #fff;
+    color: #000;
 }
 
 
@@ -136,9 +153,15 @@ p.today-city {
     background-color: #1e213a;
     text-align: center;
     color: #fff;
-    padding: 10px;
+    padding: 15px 10px 15px 10px;
     width: 120px;
-    height: 170px;
+    height: auto;
+}
+
+.max-temp, .min-temp {
+    display: inline-block;
+    color: #fff;
+    padding: 5px 5px 5px 5px;
 }
 
 /* HIGHLIGHTS */
@@ -165,9 +188,15 @@ p.today-city {
 .third-row .hightlights-card {
     background-color: #1e213a;
     text-align: center;
-    color: #fff;
+    color: #A4A1AE;
     width: 35%;
     height: auto;
+    padding-bottom: 20px;
+}
+
+.third-row .visibility, .third-row .pressure {
+    height: auto;
+    padding: 5px 0 35px 0;
 }
 
 .hightlights-card p {
@@ -188,6 +217,41 @@ p span {
     font-weight: 400;
     font-size: 2rem;
 }
+
+.arrow-icon {
+    display: inline-flex;
+    background-color: #707591;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    /* transform: rotate(calc(160deg - 40deg)); */
+}
+
+p.wind-dir-abb {
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+}
+
+.above-humidityBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.below-humidityBar {
+    display: flex;
+    justify-content: right;
+}
+
+.above-humidityBar p, .below-humidityBar p {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+} 
 
 .fourth-row {
     display: flex;
