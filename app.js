@@ -368,7 +368,7 @@ fahrenheitButton.addEventListener("click", changeCelsius);
 
     }
 
-    // CHANGE BETWEEN CELSIUS AND FAHRENHEIT
+    // CELSIUS AND FAHRENHEIT CONVERTION
     function changeCelsius(e) {
         console.log(e.target.id);
 
@@ -386,7 +386,7 @@ fahrenheitButton.addEventListener("click", changeCelsius);
             celsiusButton.classList.add('currentUnit');
             fahrenheitButton.classList.remove('currentUnit');
            
-            todayTempValue.innerHTML = `${todayTemp}ºC`;
+            todayTempValue.innerHTML = `${todayTemp}<span>ºC</span>`;
 
             render5DaysInfo(arrayDays);
 
@@ -394,7 +394,7 @@ fahrenheitButton.addEventListener("click", changeCelsius);
             celsiusButton.classList.remove('currentUnit');
             fahrenheitButton.classList.add('currentUnit');
 
-            todayTempValue.innerHTML = `${todayTempFahrenheit}ºF`; 
+            todayTempValue.innerHTML = `${todayTempFahrenheit}<span>ºF</span>`; 
 
             render5DaysInfo(arrayDays);
 
