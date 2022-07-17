@@ -112,19 +112,12 @@ p.today-city {
     gap: 10px;
 }
 
-/* .celcius-btn {
-    background-color: #fff;
-    color: #000;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    font-size: .9rem;
-    height: 35px;
-    width: 35px;
-    text-align: center;
-    border-radius: 50%;
-} */
+img.icon-img {
+    display: block;
+}
 
-.fahrenheit-btn, .celcius-btn {
+
+.fahrenheit-btn, .celsius-btn {
     background-color: #695E84;
     color: #fff;
     font-family: 'Raleway', sans-serif;
@@ -136,7 +129,7 @@ p.today-city {
     border-radius: 50%;
 }
 
-.changeTemp {
+.currentUnit {
     background-color: #fff;
     color: #000;
 }
@@ -154,11 +147,12 @@ p.today-city {
     text-align: center;
     color: #fff;
     padding: 15px 10px 15px 10px;
-    width: 120px;
+    min-width: 120px;
+    width: auto;
     height: auto;
 }
 
-.max-temp, .min-temp {
+.max-temp, .min-temp, .max-temp-fahrenheit, .min-temp-fahrenheit {
     display: inline-block;
     color: #fff;
     padding: 5px 5px 5px 5px;
@@ -261,5 +255,9 @@ p.wind-dir-abb {
 
 .fourth-row p {
     padding: 40px;
+}
+
+.hidden {
+    display: none;
 }
 

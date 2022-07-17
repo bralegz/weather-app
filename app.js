@@ -3,9 +3,12 @@ const keyIP = '692606bdba174a4f8791317ee3c90ca4'
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+let arrayDays = [];
+let todayTemp;
+let todayTempFahrenheit;
 
 // Selectors
-const celciusButton = document.querySelector(".celcius-btn");
+const celsiusButton = document.querySelector(".celsius-btn");
 const fahrenheitButton = document.querySelector(".fahrenheit-btn"); 
 const todayIconContainer = document.querySelector(".today-iconContainer");
 const todayInfoContainer = document.querySelector(".today-infoContainer");
@@ -16,8 +19,8 @@ const visibility = document.querySelector(".visibility");
 const pressure = document.querySelector(".pressure");
 
 // Event Listeners
-celciusButton.addEventListener("click", changeCelcius);
-fahrenheitButton.addEventListener("click", changeCelcius);
+celsiusButton.addEventListener("click", changeCelsius);
+fahrenheitButton.addEventListener("click", changeCelsius);
 
 
 // GET CURRENT LOCATION COORDINATES.
@@ -41,12 +44,12 @@ fahrenheitButton.addEventListener("click", changeCelcius);
         const {latitude:lat, longitude:lon, city, country} = geo;
 
 
-        // FETCH TODAY DATA
+    // FETCH TODAY DATA
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keyWeather}`)
             .then(res => res.json())
             .then(currentDayResult => {
                 console.log(currentDayResult)
-                //result destructuring
+                //currentDayResult destructuring
                 const {
                     main: {humidity: currentHumidity, pressure: currentPressure, temp: currentTemp},
                     visibility: currentVisibility,
@@ -66,9 +69,10 @@ fahrenheitButton.addEventListener("click", changeCelcius);
                 const todayInfo = [currentTemp, currentSpeed, currentHumidity, currentVisibility, currentPressure, currentIcon, mainWeather, city, currentWindDir];
                 
                 renderCurrentDay(todayInfo);
+
             })
     
-        //FETCH 5 DAYS DATA
+     //FETCH 5 DAYS DATA
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyWeather}`)
                 .then(res => res.json())
                 .then(result5Days => {
@@ -77,6 +81,8 @@ fahrenheitButton.addEventListener("click", changeCelcius);
                     const {list: dayList} = result5Days;
 
                     render5DaysInfo(dayList)
+
+                    arrayDays.push(...dayList);
                 })
                 .catch(err => {
                     console.log(err);
@@ -86,7 +92,8 @@ fahrenheitButton.addEventListener("click", changeCelcius);
     // RENDER TODAY INFO
 
     function renderCurrentDay (todayInfo) {
-        const todayTemp =  Math.floor(todayInfo[0] - 273.15);
+        todayTemp =  Math.floor(todayInfo[0] - 273.15);
+        todayTempFahrenheit =  Math.floor(todayInfo[0]);
         const todayWind = Math.floor(todayInfo[1] * 2.237); //convert to mph
         const todayHumidity = todayInfo[2];
         const todayVisibility = ( todayInfo[3] / 1609).toFixed(1);
@@ -102,12 +109,14 @@ fahrenheitButton.addEventListener("click", changeCelcius);
 
         const imgUrl = `http://openweathermap.org/img/wn/${todayIcon}@2x.png`
         const iconImg = document.createElement('img');
+        iconImg.setAttribute('id', 'iconImg');
         iconImg.src = imgUrl;
         todayIconContainer.appendChild(iconImg);
 
         //Insert today's info.
         const todayTempValue = document.createElement('p');
         todayTempValue.classList.add('todayTempValue');
+        todayTempValue.setAttribute('id', 'todayTempValue');
         todayTempValue.innerHTML = `${todayTemp}<span>ºC</span>`;
         todayInfoContainer.appendChild(todayTempValue);
 
@@ -127,10 +136,9 @@ fahrenheitButton.addEventListener("click", changeCelcius);
         todayInfoContainer.appendChild(todayCity);
 
 
-
         // INSERT HTML INTO HIGHLIGHTS CARDS
 
-        // Insert Wind
+        // Insert Wind HIGHLIGHTS
         const windValue = document.createElement('p');
         windValue.classList.add('wind-value');
         windValue.innerHTML = `${todayWind}<span>mph</span>`
@@ -242,7 +250,7 @@ fahrenheitButton.addEventListener("click", changeCelcius);
         }
 
         function addWindDirection(directionAbb) {
-            const rotateArrow = currentWindDirection - 50;
+            const rotateArrow = currentWindDirection - 45;
 
             const arrowIconContainer = document.createElement('div');
             arrowIconContainer.classList.add('arrow-icon');
@@ -257,9 +265,7 @@ fahrenheitButton.addEventListener("click", changeCelcius);
             wind.appendChild(windDirection);
         }
 
-
-
-        // Insert Humidity
+        // Insert Humidity HIGHLIGHTS
         const humidityValue = document.createElement('p');
         humidityValue.classList.add('wind-value');
         humidityValue.innerHTML = `${todayHumidity}<span>%</span>`
@@ -284,13 +290,13 @@ fahrenheitButton.addEventListener("click", changeCelcius);
         humidity.appendChild(humidityBar);
 
 
-        // Insert Visibility
+        // Insert Visibility HIGHLIGHTS
         const visibilityValue = document.createElement('p');
         visibilityValue.classList.add('wind-value');
         visibilityValue.innerHTML = `${todayVisibility} <span>miles</span>`
         visibility.appendChild(visibilityValue);
 
-        // Insert Air pressure
+        // Insert Air pressure HIGHLIGHTS
         const airPressureValue = document.createElement('p');
         airPressureValue.classList.add('wind-value');
         airPressureValue.innerHTML = `${todayAirPressure} <span>mb</span>`
@@ -311,8 +317,11 @@ fahrenheitButton.addEventListener("click", changeCelcius);
 
         for( const {main: {temp_max: tempMax, temp_min: tempMin}, weather: [{icon: iconCode}], dt_txt: dayDate} of filterDayList) {
             
-            const tempMaxCelcius = Math.floor(tempMax - 273.15);
-            const tempMinCelcius = Math.floor(tempMin - 273.15);
+            const tempMaxCelsius = Math.floor(tempMax - 273.15);
+            const tempMinCelsius = Math.floor(tempMin - 273.15);
+            const tempMaxFahrenheit = Math.floor(tempMax);
+            const tempMinFahrenheit = Math.floor(tempMin);
+
 
             const imgUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`
 
@@ -327,34 +336,68 @@ fahrenheitButton.addEventListener("click", changeCelcius);
 
             const titleDay = document.createElement('p');
             const iconImg = document.createElement('img');
+            iconImg.classList.add('icon-img');
             iconImg.src = imgUrl; 
             titleDay.innerHTML = `${weekDays[newDate.getDay()]}, ${newDate.getDate()} ${months[newDate.getMonth()]}`;
             card.appendChild(titleDay);
             card.appendChild(iconImg);
 
             const maxTemp = document.createElement('p');
-            maxTemp.classList.add('max-temp');
-            maxTemp.innerHTML = `${tempMaxCelcius}ºC`
+            if(celsiusButton.classList.contains('currentUnit')) {
+                maxTemp.classList.add('max-temp');
+                maxTemp.innerHTML = `${tempMaxCelsius}ºC`
+            } else {
+                maxTemp.classList.add('max-temp-fahrenheit');
+                maxTemp.innerHTML = `${tempMaxFahrenheit}ºF`
+            }
             card.appendChild(maxTemp);
 
+            
+
             const minTemp = document.createElement('p');
-            minTemp.classList.add('min-temp');
-            minTemp.innerHTML = `${tempMinCelcius}ºC`
+            if(celsiusButton.classList.contains('currentUnit')) {
+                minTemp.classList.add('min-temp');
+                minTemp.innerHTML = `${tempMinCelsius}ºC`
+            } else {
+                minTemp.classList.add('min-temp-fahrenheit');
+                minTemp.innerHTML = `${tempMinFahrenheit}ºF`
+            }
             card.appendChild(minTemp);
             
         }
-    
+
     }
 
-    // CHANGE BETWEEN CELCIUS AND FAHRENHEIT
-    function changeCelcius(e) {
+    // CHANGE BETWEEN CELSIUS AND FAHRENHEIT
+    function changeCelsius(e) {
         console.log(e.target.id);
-        if (e.target.id === 'celcius') {
-            celciusButton.classList.add('changeTemp');
-            fahrenheitButton.classList.remove('changeTemp');
+
+            const currentCard = document.getElementsByClassName('day');
+            const todayTempValue = document.getElementById('todayTempValue')
+
+
+            for (let i = 0; i < currentCard.length; i++) {
+                currentCard[i].style.display = "none";
+            }
+        
+
+
+        if (e.target.id === 'celsius') {
+            celsiusButton.classList.add('currentUnit');
+            fahrenheitButton.classList.remove('currentUnit');
+           
+            todayTempValue.innerHTML = `${todayTemp}ºC`;
+
+            render5DaysInfo(arrayDays);
+
         } else {
-            celciusButton.classList.remove('changeTemp');
-            fahrenheitButton.classList.add('changeTemp');
+            celsiusButton.classList.remove('currentUnit');
+            fahrenheitButton.classList.add('currentUnit');
+
+            todayTempValue.innerHTML = `${todayTempFahrenheit}ºF`; 
+
+            render5DaysInfo(arrayDays);
+
         }
     }
 
