@@ -1,3 +1,8 @@
+// Current year on the footer
+const currentYear = new Date().getFullYear();
+const copyrightFooter = document.querySelector('.copyright');
+copyrightFooter.innerHTML = `Copyright &copy ${currentYear}`;
+
 const keyWeather = '920e3027785794efbb01f56d47cbc19a';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -31,8 +36,8 @@ const visibility = document.querySelector('.visibility');
 const pressure = document.querySelector('.pressure');
 
 // Event Listeners
-celsiusButton.addEventListener('click', changeCelsius);
-fahrenheitButton.addEventListener('click', changeCelsius);
+celsiusButton.addEventListener('click', changeUnits);
+fahrenheitButton.addEventListener('click', changeUnits);
 
 // GET CURRENT LOCATION COORDINATES.
 
@@ -383,7 +388,7 @@ function render5DaysInfo(dayList) {
 }
 
 // CELSIUS AND FAHRENHEIT CONVERTION
-function changeCelsius(e) {
+function changeUnits(e) {
   console.log(e.target.id);
 
   const currentCard = document.getElementsByClassName('day');
