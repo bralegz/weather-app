@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   display: flex;
   background: #100e1d;
@@ -26,13 +30,13 @@ body {
 .weather-title-container {
   display: flex;
   justify-content: center;
-  padding: 2rem 2rem 0 2rem;
+  padding: 3rem 3rem 0 3rem;
 }
 
 .current-weather-title {
   color: #fff;
   text-align: center;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   /* margin: 0 auto 0 auto; */
 }
@@ -144,7 +148,7 @@ img.icon-img {
   color: #fff;
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   height: 35px;
   width: 35px;
   text-align: center;
@@ -208,7 +212,7 @@ img.icon-img {
 .hightlights-title {
   margin: 0;
   padding: 3rem 0 0 0;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #fff;
   font-weight: bold;
 }
@@ -242,7 +246,7 @@ img.icon-img {
 
 p.wind-value {
   margin-block-start: 0;
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   margin: 0;
   padding: 0;
