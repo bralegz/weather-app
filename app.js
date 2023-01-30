@@ -355,6 +355,9 @@ function render5DaysInfo(dayList) {
     card.classList.add('day');
     secondRow.appendChild(card);
 
+    const tempContainer = document.createElement('div');
+    tempContainer.classList.add('day-temp-container');
+
     const titleDay = document.createElement('p');
     const iconImg = document.createElement('img');
     iconImg.classList.add('icon-img');
@@ -364,6 +367,7 @@ function render5DaysInfo(dayList) {
     }`;
     card.appendChild(titleDay);
     card.appendChild(iconImg);
+    card.appendChild(tempContainer);
 
     const maxTemp = document.createElement('p');
     if (celsiusButton.classList.contains('currentUnit')) {
@@ -373,7 +377,7 @@ function render5DaysInfo(dayList) {
       maxTemp.classList.add('max-temp-fahrenheit');
       maxTemp.innerHTML = `${tempMaxFahrenheit}ºF`;
     }
-    card.appendChild(maxTemp);
+    tempContainer.appendChild(maxTemp);
 
     const minTemp = document.createElement('p');
     if (celsiusButton.classList.contains('currentUnit')) {
@@ -383,7 +387,7 @@ function render5DaysInfo(dayList) {
       minTemp.classList.add('min-temp-fahrenheit');
       minTemp.innerHTML = `${tempMinFahrenheit}ºF`;
     }
-    card.appendChild(minTemp);
+    tempContainer.appendChild(minTemp);
   }
 }
 
